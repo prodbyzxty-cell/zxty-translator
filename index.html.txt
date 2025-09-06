@@ -1,1 +1,92 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>zxty translator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 20px;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: 100%;
+      max-width: 400px;
+      height: 120px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      resize: none;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-bottom: 20px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #output {
+      width: 100%;
+      max-width: 400px;
+      min-height: 60px;
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <h1>zxty translator</h1>
+  <textarea id="input" placeholder="Írj ide angol vagy zxty szöveget..."></textarea>
+  <button onclick="translate()">Fordítás</button>
+  <div id="output"></div>
 
+  <script>
+    const dictionary = {
+      "GANKY": "csúnya",
+      "FA": "focista",
+      "FAF": "focistafeleség",
+      "PLANTY": "növény",
+      "SMINKY": "pajorka",
+      "XTRA KRAZY": "legjobb dolog",
+      "TWIZZ WU": "zxty mestere",
+      "CHONKA SECRET": "kulcs a lányokhoz"
+    };
+
+    function translate() {
+      let input = document.getElementById("input").value;
+      let output = input.split(" ").map(word => {
+        // Angol → Zxty
+        let found = Object.entries(dictionary).find(([zxty, hu]) => hu.toLowerCase() === word.toLowerCase());
+        if (found) return found[0].toLowerCase();
+        // Zxty → Magyar
+        if (dictionary[word.toUpperCase()]) return dictionary[word.toUpperCase()];
+        return word;
+      }).join(" ");
+      document.getElementById("output").innerText = output;
+    }
+  </script>
+</body>
+</html>

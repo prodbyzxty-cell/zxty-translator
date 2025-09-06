@@ -1,0 +1,1 @@
+# zxty-translator
